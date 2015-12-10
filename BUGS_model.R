@@ -31,7 +31,10 @@ ps<-c(runif(length(s), min(0), max(100)))
 pT<- as.vector(rdirichlet(1, c(1,1,1,1,1)))
 p<-list(s=ps, t=pT)
 
-##Write the data to a bugs dataset
+## Write the data to a bugs dataset You don't need to do this when
+## using JAGS.  Below should generate the same results as the example
+## with JAGS.
+
 require(R2WinBUGS); require(BRugs)
 
 data <- tempfile(fileext = ".txt")
@@ -39,7 +42,7 @@ inits <- tempfile(fileext = ".txt")
 bugs.data(a, digits = 5, dir = "", data.file = data)
 bugs.data(p, digits = 5, dir = "", data.file = inits)
 
-## Run the model in model.txt
+## Run the model in "model.txt" with BUGS
 
 monitor<-c('lambda', 's', 't')
 
