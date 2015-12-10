@@ -1,0 +1,12 @@
+model{
+  for(i in 1:T){ 
+    y[i] ~ dpois(lambda[i]) 
+    lambda[i] <- t[i]*( M[1]*s[1]*p[1,i] + M[2]*s[2]*p[2,i] + M[3]*s[3]*p[3,i] )
+  }
+
+  # parameter priors:
+  # source-parameters unconstrained prior:
+  for(i in 1:3){ s[i] ~ dunif(0,100) }
+  # type-parameters constrained prior:
+  t[1:T] ~ ddirich(a[1:T]); for(i in 1:T){ a[i] <- 1 } 
+}
